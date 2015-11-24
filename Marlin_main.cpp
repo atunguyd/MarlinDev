@@ -2029,6 +2029,10 @@ static void homeaxis(AxisEnum axis) {
       SERIAL_EOL;
     }
   #endif
+  #if ENABLED(BABYSTEPPING)
+     BabyStepsHomeAxis(axis);
+  #endif
+
 }
 
 #if ENABLED(FWRETRACT)

@@ -2,6 +2,9 @@
 #define ULTRALCD_H
 
 #include "Marlin.h"
+#if ENABLED(BABYSTEPPING)
+void BabyStepsHomeAxis(int axis);
+#endif
 #if ENABLED(ULTRA_LCD)
   #include "buzzer.h"
 

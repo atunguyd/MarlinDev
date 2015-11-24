@@ -458,14 +458,23 @@ void lcd_set_home_offsets() {
 
 
 #if ENABLED(BABYSTEPPING)
-
+static int BabyStepValue[3] = {0,0,0};
+void BabyStepsHomeAxis(int axis)
+{
+   BabyStepValue[axis] = 0;   
+}
   static void _lcd_babystep(int axis, const char* msg) {
+  static char value[8];
     if (encoderPosition != 0) {
       babystepsTodo[axis] += BABYSTEP_MULTIPLICATOR * (int)encoderPosition;
+      BabyStepValue[axis] += BABYSTEP_MULTIPLICATOR * (int)encoderPosition;
+      sprintf_P(value,PSTR("%d"),BabyStepValue[axis]);
       encoderPosition = 0;
       lcdDrawUpdate = 1;
+    }else{
+	   sprintf_P(value,PSTR("%d"),BabyStepValue[axis]);
     }
-    if (lcdDrawUpdate) lcd_implementation_drawedit(msg, "");
+    if (lcdDrawUpdate) lcd_implementation_drawedit(msg,value);
     if (LCD_CLICKED) lcd_goto_menu(lcd_tune_menu);
   }
   static void lcd_babystep_x() { _lcd_babystep(X_AXIS, PSTR(MSG_BABYSTEPPING_X)); }
