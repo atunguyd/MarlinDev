@@ -458,6 +458,7 @@ void lcd_set_home_offsets() {
 
 
 #if ENABLED(BABYSTEPPING)
+#define BABYSTEP_MULTIPLICATOR 10
 static int BabyStepValue[3] = {0,0,0};
 void BabyStepsHomeAxis(int axis)
 {

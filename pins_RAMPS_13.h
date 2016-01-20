@@ -72,7 +72,7 @@
 #endif
 
 #if MB(RAMPS_13_EFF) || ENABLED(IS_RAMPS_EFB)
-  #define FAN_PIN           9 // (Sprinter config)
+  #define FAN_PIN            -1 // (Sprinter config)   ATD changed this to make D9 control extruder fan
   #if MB(RAMPS_13_EFF)
     #define CONTROLLERFAN_PIN  -1 // Pin used for the fan to cool controller
   #endif
@@ -140,8 +140,8 @@
     #if ENABLED(REPRAP_DISCOUNT_SMART_CONTROLLER)
       #define BEEPER_PIN 37
 
-      #define BTN_EN1 31
-      #define BTN_EN2 33
+      #define BTN_EN1 33   //ATD swopped around encoder pins for full graphic display
+      #define BTN_EN2 31   //ATD swopped around encoder pins for full graphic display
       #define BTN_ENC 35
 
       #define SD_DETECT_PIN 49

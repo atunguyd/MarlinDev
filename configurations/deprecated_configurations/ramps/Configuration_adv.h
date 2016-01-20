@@ -107,7 +107,7 @@
 // extruder temperature is above/below EXTRUDER_AUTO_FAN_TEMPERATURE.
 // Multiple extruders can be assigned to the same pin in which case
 // the fan will turn on when any selected extruder is above the threshold.
-#define EXTRUDER_0_AUTO_FAN_PIN -1
+#define EXTRUDER_0_AUTO_FAN_PIN 9
 #define EXTRUDER_1_AUTO_FAN_PIN -1
 #define EXTRUDER_2_AUTO_FAN_PIN -1
 #define EXTRUDER_3_AUTO_FAN_PIN -1
@@ -145,6 +145,9 @@
   // Play a little bit with small adjustments (0.5mm) and check the behaviour.
   // The M119 (endstops report) will start reporting the Z2 Endstop as well.
 
+    #define Z2_STEP_PIN E2_STEP_PIN           // Stepper to be used to Z2 axis.
+    #define Z2_DIR_PIN E2_DIR_PIN
+    #define Z2_ENABLE_PIN E2_ENABLE_PIN
   //#define Z_DUAL_ENDSTOPS
 
   #if ENABLED(Z_DUAL_ENDSTOPS)
@@ -214,7 +217,7 @@
 #define Y_HOME_BUMP_MM 5
 #define Z_HOME_BUMP_MM 2
 #define HOMING_BUMP_DIVISOR {2, 2, 4}  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
-//#define QUICK_HOME  //if this is defined, if both x and y are to be homed, a diagonal move will be performed initially.
+#define QUICK_HOME  //if this is defined, if both x and y are to be homed, a diagonal move will be performed initially.
 
 // When G28 is called, this option will make Y home before X
 //#define HOME_Y_BEFORE_X
@@ -314,7 +317,7 @@
     // Amount of time (ms) to show the status message
     #define PROGRESS_BAR_MSG_TIME 3000
     // Amount of time (ms) to retain the status message (0=forever)
-    #define PROGRESS_MSG_EXPIRE   0
+    #define PROGRESS_MSG_EXPIRE   30000
     // Enable this to show messages for MSG_TIME then hide them
     //#define PROGRESS_MSG_ONCE
   #endif
@@ -358,12 +361,12 @@
 // Babystepping enables the user to control the axis in tiny amounts, independently from the normal printing process
 // it can e.g. be used to change z-positions in the print startup phase in real-time
 // does not respect endstops!
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   #define BABYSTEP_XY  //not only z, but also XY in the menu. more clutter, more functions
                        //not implemented for CoreXY and deltabots!
   #define BABYSTEP_INVERT_Z false  //true for inverse movements in Z
-  #define BABYSTEP_MULTIPLICATOR 2 //faster movements
+  #define BABYSTEP_Z_MULTIPLICATOR 2 //faster z movements
 #endif
 
 // @section extruder
@@ -447,16 +450,16 @@ const unsigned int dropsegments = 5; //everything with less than this number of 
 
 // Add support for experimental filament exchange support M600; requires display
 #if ENABLED(ULTIPANEL)
-  //#define FILAMENTCHANGEENABLE
+  #define FILAMENTCHANGEENABLE
   #if ENABLED(FILAMENTCHANGEENABLE)
     #define FILAMENTCHANGE_XPOS 3
     #define FILAMENTCHANGE_YPOS 3
-    #define FILAMENTCHANGE_ZADD 10
-    #define FILAMENTCHANGE_FIRSTRETRACT -2
-    #define FILAMENTCHANGE_FINALRETRACT -100
-    #define AUTO_FILAMENT_CHANGE                //This extrude filament until you press the button on LCD
-    #define AUTO_FILAMENT_CHANGE_LENGTH 0.04    //Extrusion length on automatic extrusion loop
-    #define AUTO_FILAMENT_CHANGE_FEEDRATE 300   //Extrusion feedrate (mm/min) on automatic extrusion loop
+//    #define FILAMENTCHANGE_ZADD 10
+//    #define FILAMENTCHANGE_FIRSTRETRACT -2
+//    #define FILAMENTCHANGE_FINALRETRACT -100
+//    #define AUTO_FILAMENT_CHANGE                //This extrude filament until you press the button on LCD
+//    #define AUTO_FILAMENT_CHANGE_LENGTH 0.04    //Extrusion length on automatic extrusion loop
+//    #define AUTO_FILAMENT_CHANGE_FEEDRATE 300   //Extrusion feedrate (mm/min) on automatic extrusion loop
   #endif
 #endif
 
